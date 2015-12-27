@@ -13,4 +13,7 @@ class MverbLv2 < Formula
     end
   end
 
+  test do
+    assert_match /_lv2_descriptor/, shell_output("nm  #{lib}/lv2/jg_mverb.lv2/mverb.so")
+  end
 end
