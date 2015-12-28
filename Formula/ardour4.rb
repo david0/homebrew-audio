@@ -46,7 +46,7 @@ class Ardour4 < Formula
   depends_on "suil" => :recommended
   depends_on "fftw"
   depends_on "lilv"
-  depends_on "david0/audio/libsigc++" # can be removed when libsigc++ > 2.6.2
+  depends_on "libsigc++" # can be removed when libsigc++ > 2.6.2
   depends_on :x11 => :optional
 
   depends_on "python3" => :build # for fix-installnames-magic
