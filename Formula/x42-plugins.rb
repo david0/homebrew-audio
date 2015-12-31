@@ -11,6 +11,7 @@ class X42Plugins < Formula
   depends_on "cairo"
   depends_on "pango"
   depends_on "jack"
+  depends_on "coreutils" => :build
   depends_on "libsamplerate"
   depends_on "zita-convolver"
   depends_on "lv2"
@@ -18,11 +19,12 @@ class X42Plugins < Formula
   depends_on "gtk+" => :optional
 
   def install
+    # https://github.com/x42/tuna.lv2/issues/3
+    ENV.prepend "PATH", Formula["coreutils"].libexec/"gnubin" + ":"
+
     if build.head?
       system "git", "submodule", "foreach", "git", "pull", "origin", "master"
     end
-
-    inreplace "tuna.lv2/Makefile", "install -T", "install" # -T is not supported on OS X
 
     # TODO: remove SUBDIRS but meters.lv2 is not yet building
     system "make", "install", "PREFIX=#{prefix}", "SUBDIRS=balance.lv2 convoLV2 nodelay.lv2 xfade.lv2 midifilter.lv2  sisco.lv2 tuna.lv2 onsettrigger.lv2 mixtri.lv2 fil4.lv2"
