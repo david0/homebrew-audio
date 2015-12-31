@@ -34,31 +34,61 @@ diff -u ir.lv2-1.3.2-orig/ir.h ir.lv2-1.3.2/ir.h
  #define MAXSIZE 0x00100000  /* Max. available convolver size of zita-convolver */
  
 -#define DB_CO(g) ((g) > -90.0f ? exp10f((g) * 0.05f) : 0.0f)
-+#define DB_CO(g) ((g) > -90.0f ? pow(10,(g) * 0.05f) : 0.0f)
++#define DB_CO(g) ((g) > -90.0f ? exp(log (10) * (g) * 0.05f) : 0.0f)
  #define CO_DB(g) ((g) > 0.0f ? 20.0f * log10f(g) : -90.0f)
  
  #define SMOOTH_CO_0      0.01
 diff -u ir.lv2-1.3.2-orig/ir_gui.cc ir.lv2-1.3.2/ir_gui.cc
 --- ir.lv2-1.3.2-orig/ir_gui.cc	2012-06-25 16:42:08.000000000 +0200
 +++ ir.lv2-1.3.2/ir_gui.cc	2015-12-26 19:36:38.000000000 +0100
-@@ -236,7 +236,7 @@
+@@ -224,19 +224,19 @@
+ }
+ 
+ static double convert_scale_to_real(int idx, double scale) {
+-	int log = adj_descr_table[idx].log;
++	int logv = adj_descr_table[idx].log;
+ 	double y;
+ 	double min = adj_descr_table[idx].min;
+ 	double max = adj_descr_table[idx].max;
+ 	double real = 0.0;
+-	if (log == LIN) {
++	if (logv == LIN) {
+ 		real = scale;
+-	} else if (log == LOG) {
++	} else if (logv == LOG) {
+ 		y = log10(scale);
  		real = min + (y - LOG_SCALE_MIN) / (LOG_SCALE_MAX - LOG_SCALE_MIN) * (max - min);
  		real = round(10.0 * real) / 10.0; /* one decimal digit */
- 	} else if (log == INVLOG) {
+-	} else if (log == INVLOG) {
 -		y = exp10(scale);
-+		y = pow(10,scale);
++	} else if (logv == INVLOG) {
++		y = exp(log(10) * scale);
  		real = min + (y - INVLOG_SCALE_MIN) / (INVLOG_SCALE_MAX - INVLOG_SCALE_MIN) * (max - min);
  		real = round(10.0 * real) / 10.0; /* one decimal digit */
  	}
-@@ -253,7 +253,7 @@
- 	} else if (log == LOG) {
+@@ -244,17 +244,17 @@
+ }
+ 
+ static double convert_real_to_scale(int idx, double real) {
+-	int log = adj_descr_table[idx].log;
++	int logv = adj_descr_table[idx].log;
+ 	double min = adj_descr_table[idx].min;
+ 	double max = adj_descr_table[idx].max;
+ 	double scale = 0.0;
+-	if (log == LIN) {
++	if (logv == LIN) {
+ 		scale = real;
+-	} else if (log == LOG) {
++	} else if (logv == LOG) {
  		scale = (real - min) / (max - min) *
  			(LOG_SCALE_MAX - LOG_SCALE_MIN) + LOG_SCALE_MIN;
 -		scale = exp10(scale);
-+		scale = pow(10,scale);
- 	} else if (log == INVLOG) {
+-	} else if (log == INVLOG) {
++		scale = exp(log (10) * scale);
++	} else if (logv == INVLOG) {
  		scale = (real - min) / (max - min) *
  			(INVLOG_SCALE_MAX - INVLOG_SCALE_MIN) + INVLOG_SCALE_MIN;
+ 		scale = log10(scale);
 diff -u ir.lv2-1.3.2-orig/ir_meter.cc ir.lv2-1.3.2/ir_meter.cc
 --- ir.lv2-1.3.2-orig/ir_meter.cc	2011-09-22 14:47:11.000000000 +0200
 +++ ir.lv2-1.3.2/ir_meter.cc	2015-12-26 19:36:38.000000000 +0100
@@ -67,7 +97,7 @@ diff -u ir.lv2-1.3.2-orig/ir_meter.cc ir.lv2-1.3.2/ir_meter.cc
  
  	float fzero = 1.0f + 90.0f/96.0f; /* result of convert_real_to_scale(ADJ_*_GAIN, 0) */
 -	fzero = exp10(fzero);
-+	fzero = pow(10,fzero);
++	fzero = exp(log (10) * fzero);
  	fzero = (fzero - 10.0f) / 90.0f;
  	int zero = h * (1.0 - fzero);
  
