@@ -55,6 +55,10 @@ class Ardour4 < Formula
     url "https://gist.githubusercontent.com/david0/34d1bbd280610ee48255/raw/234fec0d34a9b929f782c991f2c3804b85db6f9e/fix-installnames-magic.py"
   end
 
+  resource "mkappbundle" do
+    url "https://gist.githubusercontent.com/david0/56ee00434e4693852c24/raw/492493cc33994428648c876138597ea3cad667da/mkappbundle"
+  end
+
   needs :cxx11
   def install
     ENV.cxx11
@@ -78,6 +82,12 @@ class Ardour4 < Formula
 
       system "find " + prefix + ' \( -name ardour-4.4\* -or -name \*.dylib \) -exec chmod +w {} \;'
       system "find " + prefix + ' \( -name ardour-4.4\* -or -name \*.dylib \) -exec ./fix-installnames-magic.py {} ' + prefix + ' \;'
+    end
+
+    cd "tools/osx_packaging" do
+      resource("mkappbundle").stage pwd
+      chmod "+x", "mkappbundle"
+      system "./mkappbundle", prefix
     end
   end
 
