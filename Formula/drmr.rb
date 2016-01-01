@@ -10,13 +10,13 @@ class Drmr < Formula
   depends_on "libsamplerate"
   depends_on "gtk+"
 
-  patch do
-    url "https://github.com/david0/drmr/commit/b83aa5b7f1666056adccd3e2e58b49b0ef2b7bf8.patch"
-  end
-
   def install
     inreplace "CMakeLists.txt", "-znodelete", ""
     inreplace "drmr.ttl", ".so", ".dylib"
+
+    # add search path for Hydrogen on OS/X https://github.com/nicklan/drmr/pull/14
+    inreplace "drmr_hydrogen.c",  '"~/.hydrogen/data/drumkits/",', '"~/.hydrogen/data/drumkits/", "~/Library/Application Support/Hydrogen/drumkits", '
+
     system "cmake", ".", *std_cmake_args
     system "make", "install"
   end
