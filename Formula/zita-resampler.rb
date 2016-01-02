@@ -5,20 +5,23 @@ class ZitaResampler < Formula
   sha256 "98034c8c77b03ad1093f7ca0a83ccdfad5a36040a5a95bd4dac80fa68bcf2a65"
 
   depends_on "libsndfile"
+  depends_on "coreutils" => :build
 
   def install
+    ENV.prepend "PATH", Formula["coreutils"].libexec/"gnubin" + ":"
+
     cd "libs" do
       inreplace "Makefile", "-Wl,-soname,$(ZITA-RESAMPLER_MAJ)", ""
       inreplace "Makefile", "ldconfig", ""
-      inreplace "Makefile", /\.so\b/, ".dylib"
-      system "make", "install", "PREFIX=#{prefix}", "SUFFIX="
+      system "make", "install", "PREFIX=#{prefix}", "SUFFIX=", "ZITA-RESAMPLER_SO=libzita-resampler.dylib", "ZITA-RESAMPLER_MIN=libzita-resampler.#{version}.dylib"
     end
 
     ENV.append_to_cflags "-I#{include}"
     cd "apps" do
-      system "mkdir", "-p", man, bin
+      mkdir share
+      mkdir man
+      mkdir bin
       inreplace "Makefile", "-lrt", ""
-      inreplace "Makefile", "install -Dm", "install -m"
       system "make", "install", "PREFIX=#{prefix}", "SUFFIX=", "MANDIR=#{man}"
     end
   end
