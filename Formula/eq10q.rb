@@ -29,7 +29,7 @@ class Eq10q < Formula
       inreplace f, "pow10(", "pow(10, "
     end
 
-    system "cmake", ".", *std_cmake_args
+    system "cmake", ".", "-DCMAKE_INSTALL_PREFIX='#{lib}/lv2'", "-DCMAKE_BUILD_TYPE=Release"
     system "make", "install"
   end
 
