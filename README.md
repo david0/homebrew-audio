@@ -18,3 +18,10 @@ Use the Generic UI only instead (see the [Ardour Manual](http://manual.ardour.or
 Try using the *experimental* (and not officially supported) [Ardour Formula](https://github.com/david0/homebrew-audio/blob/master/Formula/ardour4.rb), which will build an Ardour version using the GTK stack provided by homebrew.
 
 Any other LV2 host that is build via homebrew like [jalv](https://github.com/david0/homebrew-audio/blob/master/Formula/jalv.rb) will also work fine with the GTK UIs.
+
+
+## Contributing
+
+Feel free to issue a PR adding additional formulae or improving the existing ones.
+
+You can try to commit these formulae to main homebrew but be aware that usually each formula has some problems that make it not fulfill the minimum acceptable [formula criteria](https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Acceptable-Formulae.md) (mostly *head-only*)  
