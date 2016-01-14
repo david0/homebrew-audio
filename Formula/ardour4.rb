@@ -1,29 +1,9 @@
 class Ardour4 < Formula
   desc "hard disk recorder and digital audio workstation application"
   homepage "http://ardour.org"
-  url "https://codeload.github.com/Ardour/ardour/tar.gz/4.4"
-  sha256 "d567e99c4476c0122006c85d09a8e4eab93db28be7be99d338ea66be8581bfcf"
+  url "https://codeload.github.com/Ardour/ardour/tar.gz/4.6"
+  sha256 "2d9c9220a589709387f123107e2ecc555d51ed35f1da64194cb8a95e0d902069"
   head "git://git.ardour.org/ardour/ardour.git"
-
-  stable do
-    patch do
-      # add El Capitan support
-      url "https://github.com/Ardour/ardour/commit/0e1ce02941f2df585b41c7ce162995ce9a85a598.patch"
-      sha256 "4705e84dbce2bd9ebfd04d814bb2a51f3da1abd9473268d540eab04bbabe367f"
-    end
-
-    patch do
-      # Add "-" to cpp arguments because superenv cpp needs it
-      url "https://github.com/Ardour/ardour/commit/1ecb3dde74962b17186757a93cc78eb5ea0f3c1d.patch"
-      sha256 "178a6a9f670c338ede8425d0f5f47e7e2d285ac364c641b565586de0fbc1d24f"
-    end
-
-    patch do
-      # add --use-libc++ use libc++ instead of libstdc++
-      url "https://github.com/Ardour/ardour/commit/6b00ff6198210ac3f7e11d9758f4af1962961f1d.patch"
-      sha256 "3eaee9cc46c3adcd025fc24c5ae6f2ad657a3c60945f057576c84b491ccd1935"
-    end
-  end
 
   depends_on "cairo"
   depends_on "gtk+" #=> ["with-quartz-relocation"] # will need the ardour patch also most likely
