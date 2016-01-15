@@ -15,17 +15,13 @@ matrix:
       rvm: system
 
 before_install:
-  - if [ -f ".git/shallow" ]; then travis_retry git fetch --unshallow; fi
-  - sudo chown -R $USER $(brew --repo)
+  - brew tap david0/homebrew-audio 
   - brew update
-  - mkdir -p $(brew --repo)/Library/Taps/david0/homebrew-audio
-  - ln -s $PWD $(brew --repo)/Library/Taps/david0/homebrew-audio
-  - cd $(brew --repo)/Library/Taps/david0/homebrew-audio
-  - export TRAVIS_BUILD_DIR="$(brew --repo)/Library/Taps/david0/homebrew-audio"
-  - env | grep TRAVIS_
 
 script:
-  - brew test-bot --tap=david0/homebrew-audio
+  - brew install `basename -s .rb Formula/*.rb`
+  - brew test `basename -s .rb Formula/*.rb`
+
 
 notifications:
   email:
