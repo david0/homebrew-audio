@@ -1,8 +1,8 @@
 class Ardour4 < Formula
   desc "hard disk recorder and digital audio workstation application"
   homepage "http://ardour.org"
-  url "https://codeload.github.com/Ardour/ardour/tar.gz/4.6"
-  sha256 "2d9c9220a589709387f123107e2ecc555d51ed35f1da64194cb8a95e0d902069"
+  url "https://codeload.github.com/Ardour/ardour/tar.gz/4.7"
+  sha256 "dfa3d102b3f7bb0702969153d22d9311ac98c587f691760ab0f1d3f4f455a86d"
   head "git://git.ardour.org/ardour/ardour.git"
 
   depends_on "cairo"
@@ -37,6 +37,7 @@ class Ardour4 < Formula
 
   resource "mkappbundle" do
     url "https://gist.githubusercontent.com/david0/56ee00434e4693852c24/raw/492493cc33994428648c876138597ea3cad667da/mkappbundle"
+    sha256 "2d9c9220a589709387f123107e2ecc555d51ed35f1da64194cb8a95e0d902069"
   end
 
   needs :cxx11
