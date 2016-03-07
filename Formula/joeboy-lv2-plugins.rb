@@ -15,12 +15,6 @@ class JoeboyLv2Plugins < Formula
     sha256 "b7ce935a182a254a505869a516c9c8dc6f5b73100a864be0d716ee651f128d86"
   end
 
-  patch do
-    # add targets install and uninstall to amp_with_gui
-    url "https://github.com/david0/joeboy-lv2-plugins/commit/6f1a0d71daf8da5c05b75ecdc55687f4059f29e7.patch"
-    sha256 "05739e73ee0d9c0c39fdc0dcf6528d8b5f0f01eef5974a90bbe7670f93d2c4b2"
-  end
-
   def install
     inreplace "fluidsynth/Makefile", "lv2-plugin", "lv2"
 
