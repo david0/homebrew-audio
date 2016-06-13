@@ -19,6 +19,7 @@ before_install:
   - brew update
 
 script:
+  - brew install --HEAD artyfx calf caps-lv2 drmr jalv joeboy-lv2-plugins lmms mverb-lv2 x42-plugins
   - brew install `basename -s .rb Formula/*.rb`
   - brew test `basename -s .rb Formula/*.rb`
 
