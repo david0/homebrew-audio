@@ -9,12 +9,6 @@ class JoeboyLv2Plugins < Formula
   depends_on "fluid-synth"
   depends_on "aubio"
 
-  patch do
-    #  Fix segfault when restoring fluidsynth settings
-    url "https://github.com/david0/joeboy-lv2-plugins/commit/289940bc06eec2a5afe1f833b17898b81ac1e6d6.patch"
-    sha256 "b7ce935a182a254a505869a516c9c8dc6f5b73100a864be0d716ee651f128d86"
-  end
-
   def install
     inreplace "fluidsynth/Makefile", "lv2-plugin", "lv2"
 
