@@ -6,6 +6,7 @@ class Artyfx < Formula
 
   depends_on "lv2"
   depends_on "libsndfile"
+  depends_on "jack"
   depends_on "cmake" => :build
   depends_on "pkg-config" => :build
 
