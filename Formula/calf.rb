@@ -1,6 +1,9 @@
 class Calf < Formula
   desc "audio plugin collection"
   homepage "http://calf-studio-gear.org"
+  version '72b13fa8670738e735184494554a9d6f3fad56ac'
+  url "https://github.com/calf-studio-gear/calf.git", :revision=>'72b13fa8670738e735184494554a9d6f3fad56ac' #https://github.com/calf-studio-gear/calf/issues/94
+
   head "https://github.com/calf-studio-gear/calf.git"
 
   depends_on "pkg-config" => :build
@@ -12,7 +15,7 @@ class Calf < Formula
   depends_on "jack"
   depends_on "lv2" => :recommended
   depends_on "fluid-synth" => :recommended
-  depends_on "cairo" => :optional
+  depends_on "cairo" # could be optional, see: https://github.com/calf-studio-gear/calf/issues/95
   depends_on "gtk+" => :optional
 
   patch do
