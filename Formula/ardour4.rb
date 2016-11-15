@@ -59,7 +59,7 @@ class Ardour4 < Formula
 
     #inreplace "wscript", "--stdlib=libc++", "--stdlib=libc++ --Wno-c++11-narrowing" 
 
-    system "./waf", "configure", "--prefix=#{prefix}", "--with-backends=coreaudio,jack", "--use-libc++"
+    system "./waf", "configure", "--prefix=#{prefix}", "--with-backends=coreaudio,jack", "--use-libc++", "--cxx11"
     system "./waf", "install"
   
 
@@ -98,3 +98,102 @@ index 965e546..6bc0351 100644
         linker_flags.append('--stdlib=libc++')
  
      if conf.options.cxx11 or conf.env['build_host'] in [ 'mavericks', 'yosemite', 'el_capitan' ]:
+--- a/gtk2_ardour/startup.cc
++++ b/gtk2_ardour/startup.cc
+@@ -79,23 +79,23 @@
+ 	set_position (WIN_POS_CENTER);
+ 	set_border_width (12);
+ 
+-	if ((icon_pixbuf = ::get_icon ("ardour_icon_48px")) == 0) {
++	if (!(icon_pixbuf = ::get_icon ("ardour_icon_48px"))) {
+ 		throw failed_constructor();
+ 	}
+ 
+ 	list<Glib::RefPtr<Gdk::Pixbuf> > window_icons;
+ 	Glib::RefPtr<Gdk::Pixbuf> icon;
+ 
+-	if ((icon = ::get_icon ("ardour_icon_16px")) != 0) {
++	if ((icon = ::get_icon ("ardour_icon_16px"))) {
+ 		window_icons.push_back (icon);
+ 	}
+-	if ((icon = ::get_icon ("ardour_icon_22px")) != 0) {
++	if ((icon = ::get_icon ("ardour_icon_22px"))) {
+ 		window_icons.push_back (icon);
+ 	}
+-	if ((icon = ::get_icon ("ardour_icon_32px")) != 0) {
++	if ((icon = ::get_icon ("ardour_icon_32px"))) {
+ 		window_icons.push_back (icon);
+ 	}
+-	if ((icon = ::get_icon ("ardour_icon_48px")) != 0) {
++	if ((icon = ::get_icon ("ardour_icon_48px"))) {
+ 		window_icons.push_back (icon);
+ 	}
+ 	if (!window_icons.empty ()) {
+
+--- a/gtk2_ardour/fft_graph.cc
++++ b/gtk2_ardour/fft_graph.cc
+@@ -203,7 +203,7 @@
+ 
+ 
+ 
+-	if (graph_gc == 0) {
++	if (!graph_gc) {
+ 		graph_gc = GC::create( get_window() );
+ 	}
+ 
+@@ -213,7 +213,7 @@
+ 
+ 	graph_gc->set_rgb_fg_color( grey );
+ 
+-	if (layout == 0) {
++	if (!layout) {
+ 		layout = create_pango_layout ("");
+ 		layout->set_font_description (get_style()->get_font());
+ 	}
+
+--- a/libs/gtkmm2ext/fastmeter.cc
++++ b/libs/gtkmm2ext/fastmeter.cc
+@@ -731,7 +731,7 @@
+ 
+ 	Glib::RefPtr<Gdk::Window> win;
+ 
+-	if ((win = get_window()) == 0) {
++	if (!(win = get_window())) {
+ 		queue_draw ();
+ 		return;
+ 	}
+
+--- a/gtk2_ardour/editor.cc
++++ b/gtk2_ardour/editor.cc
+@@ -714,16 +714,16 @@
+ 	list<Glib::RefPtr<Gdk::Pixbuf> > window_icons;
+ 	Glib::RefPtr<Gdk::Pixbuf> icon;
+ 
+-	if ((icon = ::get_icon ("ardour_icon_16px")) != 0) {
++	if ((icon = ::get_icon ("ardour_icon_16px"))) {
+ 		window_icons.push_back (icon);
+ 	}
+-	if ((icon = ::get_icon ("ardour_icon_22px")) != 0) {
++	if ((icon = ::get_icon ("ardour_icon_22px"))) {
+ 		window_icons.push_back (icon);
+ 	}
+-	if ((icon = ::get_icon ("ardour_icon_32px")) != 0) {
++	if ((icon = ::get_icon ("ardour_icon_32px"))) {
+ 		window_icons.push_back (icon);
+ 	}
+-	if ((icon = ::get_icon ("ardour_icon_48px")) != 0) {
++	if ((icon = ::get_icon ("ardour_icon_48px"))) {
+ 		window_icons.push_back (icon);
+ 	}
+ 	if (!window_icons.empty()) {
+
+--- a/libs/gtkmm2ext/actions.cc
++++ b/libs/gtkmm2ext/actions.cc
+@@ -401,7 +401,7 @@
+ 	   gtkmm2.6, so we fall back to the C level.
+ 	*/
+ 
+-	if (ui_manager == 0) {
++	if (!ui_manager) {
+ 		return RefPtr<Action> ();
+ 	}
