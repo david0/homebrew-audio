@@ -1,7 +1,7 @@
 class Ardour5 < Formula
   desc "hard disk recorder and digital audio workstation application"
   homepage "http://ardour.org"
-  url "git://git.ardour.org/ardour/ardour.git", :tag=>'5.0'
+  url "git://git.ardour.org/ardour/ardour.git", :tag=>'5.4'
   #sha256 "598fb7fbe288caad6d4472f6b2057e15d9e6a66770a5e64c66af01b8cd7d14f3"
   head "git://git.ardour.org/ardour/ardour.git"
 
