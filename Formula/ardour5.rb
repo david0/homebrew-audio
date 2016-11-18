@@ -13,6 +13,7 @@ class Ardour5 < Formula
   depends_on "glibmm"
   depends_on "gtkmm"
   depends_on "libsndfile"
+  depends_on "libarchive"
   depends_on "liblo"
   depends_on "taglib"
   depends_on "rubberband"
