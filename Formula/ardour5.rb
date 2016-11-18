@@ -48,17 +48,17 @@ class Ardour5 < Formula
     ENV.cxx11
 
     if build.head?
-      system "git", "tag", "-a", "-m", "head tag", "5.0"
+      system "git", "tag", "-a", "-m", "head tag", "5.4"
     end
 
     (buildpath/"libs/ardour/revision.cc").write <<-EOS.undent
       #include "ardour/revision.h"
-      namespace ARDOUR { const char* revision = "5.0-999"; }
+      namespace ARDOUR { const char* revision = "5.4-999"; }
     EOS
 
     #inreplace "wscript", "--stdlib=libc++", "--stdlib=libc++ --Wno-c++11-narrowing" 
 
-    system "./waf", "configure", "--prefix=#{prefix}", "--with-backends=coreaudio,jack", "--use-libc++"
+    system "./waf", "configure", "--prefix=#{prefix}", "--with-backends=coreaudio,jack", "--use-libc++", "--cxx11"
     system "./waf", "install"
   
 
@@ -95,3 +95,16 @@ __END__
         linker_flags.append('--stdlib=libc++')
  
      if conf.options.cxx11 or conf.env['build_host'] in [ 'mavericks', 'yosemite', 'el_capitan' ]:
+diff --git a/wscript b/wscript
+index 9edfde8..6d026e0 100644
+--- a/wscript
++++ b/wscript
+@@ -536,7 +536,7 @@ int main() { return 0; }''',
+     elif conf.env['build_target'] in [ 'mavericks', 'yosemite', 'el_capitan' ]:
+         compiler_flags.extend(
+                 ("-DMAC_OS_X_VERSION_MAX_ALLOWED=1090",
+-                 "-mmacosx-version-min=10.8"))
++                 "-mmacosx-version-min=10.9"))
+
+     #
+     # save off CPU element in an env
