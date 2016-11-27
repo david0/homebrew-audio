@@ -10,6 +10,8 @@ class Jack2 < Formula
   depends_on "libsndfile"
   depends_on "libsamplerate"
   depends_on "aften"
+  
+  conflicts_with "jack"
 
 #   def install
 #     # Makefile hardcodes Carbon header location
