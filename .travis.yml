@@ -1,6 +1,10 @@
 language: objective-c
 matrix:
   include:
+    - env: OSX=10.12
+      os: osx
+      osx_image: osx10.12
+      rvm: system
     - env: OSX=10.11
       os: osx
       osx_image: osx10.11
