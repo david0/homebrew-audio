@@ -42,10 +42,6 @@ class Ardour5 < Formula
     sha256 "ef5d349e9281605bc115217b146c81e6e38aefb39b014139e859ba031460b838"
   end
 
-  # Otherwise fails with /System/Library/Frameworks/Security.framework/Headers/CSCommon.h:200:32: error: enumerator value evaluates to -2147483648, which cannot be narrowed to type 'uint32_t'
-  #    (aka 'unsigned int') [-Wc++11-narrowing]
-  patch :DATA
-
   needs :cxx11
   def install
     ENV.cxx11
@@ -58,8 +54,6 @@ class Ardour5 < Formula
       #include "ardour/revision.h"
       namespace ARDOUR { const char* revision = "5.10-999"; }
     EOS
-
-    # inreplace "wscript", "--stdlib=libc++", "--stdlib=libc++ --Wno-c++11-narrowing"
 
     system "./waf", "configure", "--prefix=#{prefix}", "--with-backends=coreaudio,jack", "--use-libc++"
     system "./waf", "install"
@@ -87,13 +81,3 @@ end
 
 
 __END__
---- a/wscript
-+++ b/wscript
-@@ -396,6 +396,7 @@ int main() { return 0; }''',
- 
-     if opt.use_libcpp or conf.env['build_host'] in [ 'el_capitan' ]:
-        cxx_flags.append('--stdlib=libc++')
-+       cxx_flags.append('-Wno-c++11-narrowing')
-        linker_flags.append('--stdlib=libc++')
- 
-     if conf.options.cxx11 or conf.env['build_host'] in [ 'mavericks', 'yosemite', 'el_capitan' ]:
