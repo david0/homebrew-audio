@@ -2,8 +2,7 @@ class Calf < Formula
   desc "audio plugin collection"
   homepage "http://calf-studio-gear.org"
   version '72b13fa8670738e735184494554a9d6f3fad56ac'
-  url "https://github.com/calf-studio-gear/calf.git", :revision=>'72b13fa8670738e735184494554a9d6f3fad56ac' #https://github.com/calf-studio-gear/calf/issues/94
-
+  url "https://github.com/calf-studio-gear/calf.git", :revision=>'3274b8e63b5656f1d970990e63df148993f9e920'
   head "https://github.com/calf-studio-gear/calf.git"
 
   depends_on "pkg-config" => :build
@@ -15,13 +14,13 @@ class Calf < Formula
   depends_on "jack"
   depends_on "lv2" => :recommended
   depends_on "fluid-synth" => :recommended
-  depends_on "cairo" # could be optional, see: https://github.com/calf-studio-gear/calf/issues/95
+  depends_on "cairo" => :optional
   depends_on "gtk+" => :optional
 
   patch do
     # Test if linker supports nodelete
     url "https://github.com/david0/calf/commit/d2f174083d97ce0f6930fc28764fdec80810f464.patch"
-    sha256 "e63a29017ce1cfff2a374f48fc3f2d99463851e88e5462aa5bc6475a870124f7"
+    sha256 "e92414d806af2551dcb5959c0de26a5195aa36db8d0d9110a4095ddc94c5bc09"
   end
 
   def install
