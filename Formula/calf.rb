@@ -20,7 +20,7 @@ class Calf < Formula
   patch do
     # Test if linker supports nodelete
     url "https://github.com/david0/calf/commit/d2f174083d97ce0f6930fc28764fdec80810f464.patch"
-    sha256 "e92414d806af2551dcb5959c0de26a5195aa36db8d0d9110a4095ddc94c5bc09"
+    sha256 "f44124501098e9bfac3da314198698ba9e72db9171f5670b0c8d1423267bd6f8"
   end
 
   def install
