@@ -11,9 +11,9 @@ class Artyfx < Formula
   depends_on "pkg-config" => :build
 
   def install
-    inreplace "CMakeLists.txt", "-shared -Wl,-z,nodelete -Wl,--no-undefined", "-dynamiclib"
+    inreplace "CMakeLists.txt", "-Wl,--no-undefined", "-dynamiclib"
     inreplace "artyfx.lv2/manifest.ttl", /\.so\b/, ".dylib"
-    system "cmake", ".", "-DHAVE_NTK=OFF", *std_cmake_args
+    system "cmake", ".", "-DBUILD_GUI=false", *std_cmake_args
     system "make", "install"
   end
 
