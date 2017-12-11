@@ -24,6 +24,7 @@ class Calf < Formula
   end
 
   def install
+    ENV.cxx11
     args = "--disable-dependency-tracking",
            "--prefix=#{prefix}",
            "--with-lv2-dir=#{lib}/lv2/"
