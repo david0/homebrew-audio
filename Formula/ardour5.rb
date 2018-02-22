@@ -32,6 +32,18 @@ class Ardour5 < Formula
 
   depends_on "python3" => :build # for fix-installnames-magic
 
+  patch do
+    # commit e3c6a41c1190253eb46844ab6915c7aa673a7dc9 from upstream master to fix build on High Sierra
+    url "https://gist.githubusercontent.com/jgefele/baca5725ee2fa5067e901a5f2c2f9162/raw/3eeb2585947da3cad36450863c5d345fa825497b/0001-Adds-support-for-building-in-Mac-OS-High-Sierra.patch"
+    sha256 "9ba4a37fbb70cc467fe40aa9842b642861c00bc6157cdeca0c9f6701dcfc998e"
+  end
+
+  patch do
+    # fix framework reference from "CoreMidi" to "CoreMIDI" on High Sierra  --  Ardour developers have been informed about this
+    url "https://gist.githubusercontent.com/jgefele/baca5725ee2fa5067e901a5f2c2f9162/raw/99be80665e3e4072bf65862ac2e16f97ddcfe814/0002-Fixes-framework-CoreMIDI-for-building-in-Mac-OS-High-Sierra.patch"
+    sha256 "f25230d81898e1795183799d1ac8c05e18c366f6768d24a20b5944b7058269e1"
+  end
+
   resource "fix-installnames-magic" do
     url "https://gist.githubusercontent.com/david0/34d1bbd280610ee48255/raw/234fec0d34a9b929f782c991f2c3804b85db6f9e/fix-installnames-magic.py"
     sha256 "2fb1b4a3e8c30e397c05480bad770101e10db04713f5c30dc951a52f3a465e1f"
