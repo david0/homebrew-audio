@@ -42,7 +42,7 @@ class Ardour5 < Formula
     sha256 "ef5d349e9281605bc115217b146c81e6e38aefb39b014139e859ba031460b838"
   end
 
-  needs :cxx11
+  # needs :cxx11
   def install
     ENV.cxx11
 
