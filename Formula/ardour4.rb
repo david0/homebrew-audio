@@ -44,7 +44,7 @@ class Ardour4 < Formula
   #    (aka 'unsigned int') [-Wc++11-narrowing]
   patch :DATA
 
-  needs :cxx11
+  # needs :cxx11
   def install
     ENV.cxx11
 
