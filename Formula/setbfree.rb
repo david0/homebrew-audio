@@ -16,6 +16,9 @@ class Setbfree < Formula
   def install
     inreplace "common.mak", "`pkg-config --variable=libdir ftgl`/libfreetype.a", "`pkg-config --libs freetype2`"
     system "make", "PREFIX=#{prefix}", "FONTFILE=/opt/X11/share/fonts/TTF/VeraBd.ttf", "install"
+
+    # Workaround for setBfree#56
+    cp "/opt/X11/share/fonts/TTF/VeraBd.ttf", "#{lib}/lv2/b_synth/"
   end
 
   test do
