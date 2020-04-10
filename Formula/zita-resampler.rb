@@ -1,22 +1,23 @@
 class ZitaResampler < Formula
   desc "C++ library for resampling audio signals"
   homepage "http://kokkinizita.linuxaudio.org/linuxaudio/"
-  url "http://kokkinizita.linuxaudio.org/linuxaudio/downloads/zita-resampler-1.3.0.tar.bz2"
-  sha256 "98034c8c77b03ad1093f7ca0a83ccdfad5a36040a5a95bd4dac80fa68bcf2a65"
+  url "http://kokkinizita.linuxaudio.org/linuxaudio/downloads/zita-resampler-1.6.2.tar.bz2"
+  sha256 "233baefee297094514bfc9063e47f848e8138dc7c959d9cd957b36019b98c5d7"
 
-  depends_on "libsndfile"
   depends_on "coreutils" => :build
+  depends_on "libsndfile"
 
   def install
     ENV.prepend "PATH", Formula["coreutils"].libexec/"gnubin" + ":"
 
-    cd "libs" do
+    cd "source" do
       inreplace "Makefile", "-Wl,-soname,$(ZITA-RESAMPLER_MAJ)", ""
       inreplace "Makefile", "ldconfig", ""
       system "make", "install", "PREFIX=#{prefix}", "SUFFIX=", "ZITA-RESAMPLER_SO=libzita-resampler.dylib", "ZITA-RESAMPLER_MIN=libzita-resampler.#{version}.dylib"
     end
 
     ENV.append_to_cflags "-I#{include}"
+    ENV.append "LDFLAGS", "-L#{lib}"
     cd "apps" do
       mkdir share
       mkdir man
