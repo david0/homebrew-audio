@@ -12,6 +12,8 @@ class Setbfree < Formula
   depends_on "ftgl" => :recommended
   depends_on "libpng" => :recommended
   depends_on "zlib" => :recommended
+  depends_on "pango" => :recommended
+  depends_on "cairo" => :recommended
 
   def install
     inreplace "common.mak", "`pkg-config --variable=libdir ftgl`/libfreetype.a", "`pkg-config --libs freetype2`"
