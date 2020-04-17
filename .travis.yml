@@ -3,10 +3,6 @@ matrix:
   include:
     - language: cpp
       os: osx
-    - env: OSX=10.14
-      os: osx
-      osx_image: osx10.14
-      rvm: system
 
 before_install:
   - brew tap david0/homebrew-audio 
