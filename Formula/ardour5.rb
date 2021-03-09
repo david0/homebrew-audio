@@ -28,7 +28,7 @@ class Ardour5 < Formula
   depends_on "fftw"
   depends_on "lilv"
   depends_on "libsigc++"
-  depends_on :x11 => :optional
+#  depends_on :x11 => :optional
 
   depends_on "python3" => :build # for fix-installnames-magic
 
