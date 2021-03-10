@@ -13,13 +13,13 @@ class Jalv < Formula
   depends_on "sratom"
   depends_on "gtk+"
   depends_on "gtk+3" => :optional
-  depends_on "qt4"
-  depends_on "qt5" => :optional
+  depends_on "qt5"
 
   # Workaround: Deadlock on program start, disable semaphores
   patch :p1, :DATA
 
   def install
+    ENV.cxx11
     system "./waf", "configure", "--prefix=#{prefix}"
     system "./waf", "install"
   end
