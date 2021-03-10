@@ -1,10 +1,10 @@
 class Eq10q < Formula
-  desc "audio plugins implementing a powerful and flexible parametric equalizer"
-  homepage "http://eq10q.sourceforge.net"
-  url "https://downloads.sourceforge.net/project/eq10q/eq10q-2.0.tar.gz?r=http%3A%2F%2Feq10q.sourceforge.net%2F%3Fpage_id%3D16&ts=1451392119"
-  version "2.0"
-  sha256 "704410f7835e17599b92dcf27bd2bc2c02642ebce5157b79c42e630c3c757423"
-  head "svn://svn.code.sf.net/p/eq10q/code/trunk"
+  desc 'audio plugins implementing a powerful and flexible parametric equalizer'
+  homepage 'http://eq10q.sourceforge.net'
+  url 'https://downloads.sourceforge.net/project/eq10q/eq10q-2.2.tar.gz'
+  version '2.2'
+  sha256 '337f4c703ba31902565faad1cd450cf0312ad5a48dc499661277f287b662b09a'
+  head 'svn://svn.code.sf.net/p/eq10q/code/trunk'
 
   depends_on "cmake" => :build
   depends_on "pkg-config" => :build
@@ -19,6 +19,11 @@ class Eq10q < Formula
   end
 
   def install
+
+    Dir['**/*_ui.cpp'].each do |source| 
+      inreplace source, 'const _LV2UI_Descriptor', 'const LV2UI_Descriptor'
+    end
+
     # Wrong library name in ttl-files on OS/X (https://sourceforge.net/p/eq10q/bugs/14/)
     ["eq1qm.ttl", "eq1qs.ttl", "eq4qm.ttl", "eq4qs.ttl", "eq6qm.ttl", "eq6qs.ttl", "eq10qm.ttl", "eq10qs.ttl", "gate.ttl", "compressor.ttl", "gate_stereo.ttl", "compressor_stereo.ttl", "bassup.ttl", "lr2ms.ttl", "ms2lr.ttl"].each do |ttl|
       inreplace ttl, /\.so\b/, ".dylib"
