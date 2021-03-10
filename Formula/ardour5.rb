@@ -55,6 +55,7 @@ class Ardour5 < Formula
     ENV.cxx11
 
     if build.head?
+      system "git", "tag", "-d", "5.10"
       system "git", "tag", "-a", "-m", "head tag", "5.10"
     end
 
