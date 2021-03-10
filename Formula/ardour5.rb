@@ -58,7 +58,7 @@ class Ardour5 < Formula
       system "git", "tag", "-a", "-m", "head tag", "5.10"
     end
 
-    (buildpath/"libs/ardour/revision.cc").write <<-EOS
+    (buildpath/"libs/ardour/revision.cc").write <<~EOS
       #include "ardour/revision.h"
       namespace ARDOUR { const char* revision = "5.10-999"; }
     EOS
