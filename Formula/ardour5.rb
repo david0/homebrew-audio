@@ -28,7 +28,15 @@ class Ardour5 < Formula
   depends_on "fftw"
   depends_on "lilv"
   depends_on "libsigc++"
-  depends_on :x11 => :optional
+
+  # replaced :x11 by dedicated dependencies, untested, not sure whats really needed
+  depends_on "fontconfig" => :optional
+  depends_on "freetype" => :optional
+  depends_on "libx11" => :optional
+  depends_on "libxft" => :optional
+  depends_on "libxmu" => :optional
+  depends_on "libxrender" => :optional
+  depends_on "libxt" => :optional
 
   depends_on "python3" => :build # for fix-installnames-magic
 
