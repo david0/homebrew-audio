@@ -1,14 +1,14 @@
 class Calf < Formula
-  desc "audio plugin collection"
+  desc "Audio plugin collection"
   homepage "http://calf-studio-gear.org"
-  version '72b13fa8670738e735184494554a9d6f3fad56ac'
-  url "https://github.com/calf-studio-gear/calf.git", :revision=>'3274b8e63b5656f1d970990e63df148993f9e920'
+  url "https://github.com/calf-studio-gear/calf.git", :tag=>"0.90.3"
+  license "LGPL-2.1"
   head "https://github.com/calf-studio-gear/calf.git"
 
-  depends_on "pkg-config" => :build
   depends_on "automake" => :build
   depends_on "autoconf" => :build
   depends_on "libtool" => :build
+  depends_on "pkg-config" => :build
 
   depends_on "glib"
   depends_on "jack"
@@ -24,7 +24,6 @@ class Calf < Formula
   end
 
   def install
-    ENV.cxx11
     args = "--disable-dependency-tracking",
            "--prefix=#{prefix}",
            "--with-lv2-dir=#{lib}/lv2/"
