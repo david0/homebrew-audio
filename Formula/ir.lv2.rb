@@ -1,8 +1,9 @@
 class IrLv2 < Formula
   desc "no-latency/low-latency, realtime, high performance signal convolver especially for creating reverb effects"
-  homepage "http://factorial.hu/plugins/lv2/ir"
-  url "http://factorial.hu/system/files/ir.lv2-1.3.2.tar.gz"
-  sha256 "ef9053e7b6002ed9f0b9a95046ec61cfb7035c0b2159f0fdc98ad44403f802ca"
+  homepage "https://tomscii.sig7.se/plugins/ir.lv2/"
+  url "https://github.com/tomszilagyi/ir.lv2/archive/1.3.4.tar.gz"
+  sha256 "3d5e7f4b2ad53e2f88d949dd74e5189bc3d88261c9969e1d2a3cd1dc583a6532"
+  head "https://github.com/tomszilagyi/ir.lv2"
 
   depends_on "pkg-config" => :build
   depends_on "gtk"
@@ -16,8 +17,9 @@ class IrLv2 < Formula
   def install
     # nodelete is not supported
     inreplace "Makefile", "-z nodelete", "" 
+    inreplace "ir_gui.cc", "_LV2UI_Descriptor", "LV2UI_Descriptor"
 
-    system "make", "install", "PREFIX=#{prefix}"
+    system "make", "install", "INSTDIR=#{lib}/lv2"
   end
 
   test do
