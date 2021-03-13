@@ -17,6 +17,7 @@ class Talentedhack < Formula
   end
 
   test do
-    assert_match /_lv2_descriptor/, shell_output("nm  #{lib}/lv2/blop.lv2/triangle.dylib")
+    output_dir = lib/"lv2"/"talentedhack.lv2"
+    assert_match /_lv2_descriptor/, shell_output("nm  #{output_dir}/talentedhack.so")
   end
 end
