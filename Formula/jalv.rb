@@ -17,6 +17,14 @@ class Jalv < Formula
   depends_on "suil"
   depends_on "gtk+3" => :optional
 
+  unless build.head?
+    # Fix crash when running jalv without arguments
+    patch do
+      url "https://gitlab.com/drobilla/jalv/-/commit/8952dde02d9d6761ae0cae033600f4a220c8e075.patch"
+      sha256 "5fad49ccdfcdd6f0fdb9d6005a64965e3ef3b7afa354ea0cc9b0858279400d50"
+    end
+  end
+
   # Workaround: Deadlock on program start, disable semaphores
   patch :p1, :DATA
 
