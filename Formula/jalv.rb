@@ -1,19 +1,21 @@
 class Jalv < Formula
-  desc "simple but fully featured LV2 host for Jack"
+  desc "Simple but fully featured LV2 host for Jack"
   homepage "http://drobilla.net/software/jalv/"
+  url "http://download.drobilla.net/jalv-1.6.6.tar.bz2"
+  sha256 "92d141781b664373207c343cebc5e9b8ced461faf26fdccb95df0007b0639e16"
   head "http://git.drobilla.net/jalv.git"
 
   depends_on "pkg-config" => :build
-  depends_on "lv2"
+  depends_on "gtk+"
   depends_on "jack"
   depends_on "lilv"
+  depends_on "lv2"
+  depends_on "qt@5"
   depends_on "serd"
   depends_on "sord"
-  depends_on "suil"
   depends_on "sratom"
-  depends_on "gtk+"
+  depends_on "suil"
   depends_on "gtk+3" => :optional
-  depends_on "qt5"
 
   # Workaround: Deadlock on program start, disable semaphores
   patch :p1, :DATA
