@@ -9,20 +9,30 @@ class ZitaResampler < Formula
 
   def install
     ENV.prepend "PATH", Formula["coreutils"].libexec/"gnubin" + ":"
+    ENV.prepend "PKG_CONFIG_PATH", "#{HOMEBREW_PREFIX}/lib/pkgconfig"
 
     cd "source" do
-      inreplace "Makefile", "-Wl,-soname,$(ZITA-RESAMPLER_MAJ)", ""
-      inreplace "Makefile", "ldconfig", ""
+      inreplace "Makefile" do |s|
+        s.gsub! "-Wl,-soname,$(ZITA-RESAMPLER_MAJ)", ""
+        s.gsub! "ldconfig", ""
+        s.gsub! "-march=native", ""
+      end
       system "make", "install", "PREFIX=#{prefix}", "SUFFIX=", "ZITA-RESAMPLER_SO=libzita-resampler.dylib", "ZITA-RESAMPLER_MIN=libzita-resampler.#{version}.dylib"
     end
 
     ENV.append_to_cflags "-I#{include}"
+
+    ENV.append_to_cflags "-I"+Formula["libsndfile"].include
     ENV.append "LDFLAGS", "-L#{lib}"
+    ENV.append "LDFLAGS", "-L"+Formula["libsndfile"].lib
     cd "apps" do
       mkdir share
       mkdir man
       mkdir bin
-      inreplace "Makefile", "-lrt", ""
+      inreplace "Makefile" do |s|
+        s.gsub! "-lrt", ""
+        s.gsub! "-march=native", ""
+      end
       system "make", "install", "PREFIX=#{prefix}", "SUFFIX=", "MANDIR=#{man}"
     end
   end
