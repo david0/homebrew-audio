@@ -2,7 +2,7 @@ class Aether < Formula
   desc "Algorithmic reverb linux LV2 plugin based on Cloudseed"
   homepage "https://dougal-s.github.io/Aether/"
   license "MIT"
-  head "https://github.com/Dougal-s/Aether.git", branch: "MacOS"
+  head "https://github.com/Dougal-s/Aether.git"
 
   depends_on "cmake" => :build
   depends_on "make" => :build
@@ -16,7 +16,7 @@ class Aether < Formula
     ENV.append "CXXFLAGS", "-g"
     mkdir "build"
     chdir "build" do
-      system "cmake", '-DCMAKE_BUILD_TYPE="Debug"', "-S", "..", "-B", ".", *std_cmake_args
+      system "cmake", '-DCMAKE_BUILD_TYPE="Release"', "-S", "..", "-B", ".", *std_cmake_args
       system "make"
     end
     (lib / "lv2").install "aether.lv2"
