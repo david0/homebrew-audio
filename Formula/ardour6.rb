@@ -61,7 +61,7 @@ class Ardour6 < Formula
 
     (buildpath/"libs/ardour/revision.cc").write <<~EOS
       #include "ardour/revision.h"
-      namespace ARDOUR { const char* revision = "6.8-999"; }
+      namespace ARDOUR { const char* revision = "6.8-999"; const char* date = "2021-08-12"; }
     EOS
 
     system "./waf", "configure", "--prefix=#{prefix}", "--with-backends=coreaudio,jack", "--use-libc++"
