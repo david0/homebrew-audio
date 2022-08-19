@@ -1,7 +1,7 @@
 class Ardour6 < Formula
   desc "Hard disk recorder and digital audio workstation application"
   homepage "https://ardour.org"
-  url "git://git.ardour.org/ardour/ardour.git", :tag=>"6.8", :revision => "1734fac4105106e02219834d330fa9eb0ceef3cd"
+  url "git://git.ardour.org/ardour/ardour.git", :tag=>"6.9", :revision => "945c8f288077565fe3de32c6ac0cb50e286722e4"
   head "git://git.ardour.org/ardour/ardour.git"
 
   depends_on "boost"
@@ -55,8 +55,8 @@ class Ardour6 < Formula
     ENV.cxx11
 
     if build.head?
-      system "git", "tag", "-d", "6.8"
-      system "git", "tag", "-a", "-m", "head tag", "6.8"
+      system "git", "tag", "-d", "6.9"
+      system "git", "tag", "-a", "-m", "head tag", "6.9"
     end
 
     (buildpath/"libs/ardour/revision.cc").write <<~EOS
