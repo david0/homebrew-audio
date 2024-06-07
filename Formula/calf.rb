@@ -17,6 +17,13 @@ class Calf < Formula
   depends_on "cairo" => :optional
   depends_on "gtk+" => :optional
 
+  stable do
+    patch do
+      url "https://github.com/david0/calf/commit/d2f174083d97ce0f6930fc28764fdec80810f464.patch"
+      sha256 "f44124501098e9bfac3da314198698ba9e72db9171f5670b0c8d1423267bd6f8"
+    end
+  end
+
   def install
     args = "--disable-dependency-tracking",
            "--prefix=#{prefix}",
