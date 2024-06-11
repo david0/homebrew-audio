@@ -17,14 +17,6 @@ class Calf < Formula
   depends_on "cairo" => :optional
   depends_on "gtk+" => :optional
 
-
-  head do
-    # Test if linker supports nodelete
-    patch do
-      url "https://github.com/david0/calf/commit/e56702017a3904970f42357a931db949945f43ce.patch"
-      sha256 "89c0765cafe81600774116efd8fa48a6d4878d6913e7f9c05870da7d9f6a3d77"
-    end
-  end
   stable do
     patch do
       url "https://github.com/david0/calf/commit/d2f174083d97ce0f6930fc28764fdec80810f464.patch"
